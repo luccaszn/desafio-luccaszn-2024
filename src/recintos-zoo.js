@@ -37,31 +37,41 @@ class RecintosZoo {
         return;
       }
 
-      // Verificar se há carnívoros diferentes
+      // Verificar se há carnívoros diferentes no recinto
       const carnivoroNoRecinto = recinto.animais.some(a => especies[a.especie].carnivoro);
       if (animal.carnivoro && carnivoroNoRecinto && recinto.animais.some(a => a.especie !== especie)) {
+        // Leões e outros carnívoros não podem dividir o recinto com outras espécies
         return;
       }
 
       // Verificar regra dos macacos
       if (especie === "MACACO" && recinto.animais.length === 0) {
+        // Macacos não se sentem confortáveis em recintos vazios
         return;
       }
 
       // Verificar regra dos hipopótamos
       if (especie === "HIPOPOTAMO" && recinto.bioma !== "savana e rio" && recinto.animais.length > 0) {
+        // Hipopótamos só toleram outras espécies se estiverem em recintos com savana e rio
         return;
       }
 
-      // Calcular espaço necessário
+      // Calcular espaço ocupado
       const espacoOcupado = recinto.animais.reduce((total, a) => {
         const tamanhoEspecie = especies[a.especie].tamanho;
         return total + (tamanhoEspecie * a.quantidade);
       }, 0);
 
-      // Verificar espaço disponível
+      // Calcular espaço necessário para os novos animais
+      let espacoNecessario = animal.tamanho * quantidade;
+
+      // Se houver mais de uma espécie no recinto, adicionar espaço extra
+      const diferentesEspecies = recinto.animais.some(a => a.especie !== especie);
+      if (diferentesEspecies) {
+        espacoNecessario += 1; // 1 espaço adicional
+      }
+
       const espacoRestante = recinto.tamanho - espacoOcupado;
-      const espacoNecessario = (animal.tamanho * quantidade) + (recinto.animais.length > 0 ? 1 : 0);
 
       if (espacoNecessario <= espacoRestante) {
         recintosViaveis.push({
@@ -72,19 +82,16 @@ class RecintosZoo {
       }
     });
 
+    // Se nenhum recinto for viável, retornar o erro
     if (recintosViaveis.length === 0) {
       return { erro: "Não há recinto viável" };
     }
 
-    // Ordenar por número do recinto
-    recintosViaveis.sort((a, b) => a.numero - b.numero);
-
-    // Formatar a saída
     return {
       recintosViaveis: recintosViaveis.map(r => `Recinto ${r.numero} (espaço livre: ${r.espacoLivre} total: ${r.total})`)
     };
   }
 }
 
-// Exportar a classe para ser usada nos testes
-export { RecintosZoo as RecintosZoo };
+// Exportar a classe usando CommonJS (ou pode manter como ES6 se preferir)
+module.exports = { RecintosZoo };

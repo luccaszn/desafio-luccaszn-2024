@@ -1,0 +1,25 @@
+{
+  "name": "desafio-luccaszn-2024",
+  "version": "1.0.0",
+  "description": "Desafio para organizar recintos de zoológico",
+  "main": "src/recintos-zoo.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luccaszn/desafio-luccaszn-2024.git"
+  },
+  "author": "luccaszn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luccaszn/desafio-luccaszn-2024/issues"
+  },
+  "homepage": "https://github.com/luccaszn/desafio-luccaszn-2024#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
