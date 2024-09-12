@@ -1,0 +1,16 @@
+{
+    "name": "desafio-luccaszn-2024",
+    "version": "1.0.0",
+    "description": "Desafio para organizar recintos de zoológico",
+    "main": "src/recintos-zoo.js",
+    "scripts": {
+      "test": "jest"
+    },
+    "dependencies": {},
+    "devDependencies": {
+      "jest": "^27.0.6"
+    },
+    "author": "Luccaszn",
+    "license": "ISC"
+  }
+  
